@@ -7,6 +7,6 @@ def process_user_request(question: str):
     return {
         "success": True,
         "message": "Planner Agent executed successfully.",
-        "user_query": plan.question
+        "user_query": plan.question,
+        "plan": plan
     }
-
