@@ -19,3 +19,11 @@ class QueryResponse(BaseModel):
     message: str
     user_query: str
     plan: ExecutionPlan
+    sql: str | None = None
+    sql_explanation: str | None = None
+    results: list[dict] | None = None
+
+class SQLGenerationResult(BaseModel):
+    sql: str
+    explanation: str
+

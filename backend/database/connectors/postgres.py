@@ -3,13 +3,9 @@ from typing import Any, Dict, List, Optional
 
 import psycopg
 from psycopg.rows import dict_row
+from config import settings
 
-try:
-    from backend.config import settings
-except ImportError:
-    from config import settings
-
-from backend.database.manager import DatabaseManager
+from database.manager import DatabaseManager
 
 logger = logging.getLogger(__name__)
 
@@ -157,4 +153,4 @@ class PostgreSQLConnector(DatabaseManager):
         schema = {}
         for table in tables:
             schema[table] = self.describe_table(table)
-        return schema
+        return schema

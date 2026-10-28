@@ -1,6 +1,6 @@
-from backend.database.connectors.postgres import PostgreSQLConnector
-from backend.database.connectors.sqlite import SQLiteConnector
-from backend.database.manager import DatabaseManager
+from database.connectors.postgres import PostgreSQLConnector
+from database.connectors.sqlite import SQLiteConnector
+from database.manager import DatabaseManager
 
 
 def get_database_connector(db_type: str, **kwargs) -> DatabaseManager:

@@ -2,7 +2,7 @@ import logging
 import sqlite3
 from typing import Any, Dict, List, Optional
 
-from backend.database.manager import DatabaseManager
+from database.manager import DatabaseManager
 
 logger = logging.getLogger(__name__)
 
