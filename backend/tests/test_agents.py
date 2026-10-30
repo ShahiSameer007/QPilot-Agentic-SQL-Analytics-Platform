@@ -1,7 +1,9 @@
+
 from database.connectors.sqlite import SQLiteConnector
 from database.queries import validate_read_only, sanitize_query
 from agents.planner.agent import plan_user_request
 from agents.sql_generator.agent import generate_sql
+from agents.analytics.agent import analyze_results
 
 
 DB_PATH = "../datasets/qpilot_dev.db"
@@ -79,8 +81,30 @@ def main():
         print(error)
         return
 
+    # ---------------------------------------------------------
+    # 6. Analytics Agent
+    # ---------------------------------------------------------
+    analysis = analyze_results(
+        question=QUESTION,
+        sql=clean_sql,
+        results=results
+    )
+
+    print("\n[6] Analytics Agent")
+    print("-" * 70)
+
+    print("\nAnalytical Summary:")
+    print(analysis.summary)
+
+    print("\nKey Insights:")
+    for insight in analysis.insights:
+        print(f"- {insight}")
+
+    print("\nVisualization Recommendation:")
+    print(analysis.visualization.model_dump())
+
     print("\n" + "=" * 70)
-    print("Test completed successfully.")
+    print("Three-agent pipeline test completed successfully.")
     print("=" * 70)
 
 

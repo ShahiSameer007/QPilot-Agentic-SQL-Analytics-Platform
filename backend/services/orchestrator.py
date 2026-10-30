@@ -1,5 +1,8 @@
+
 from agents.planner.agent import plan_user_request
 from agents.sql_generator.agent import generate_sql
+from agents.analytics.agent import analyze_results
+
 from database.queries import validate_read_only, sanitize_query
 from services.database_service import get_database
 
@@ -32,6 +35,14 @@ def process_user_request(question: str):
     # 7. Execute SQL
     results = db.execute_query(clean_sql)
 
+    # 8. Analytics Agent
+    analysis = analyze_results(
+        question=question,
+        sql=clean_sql,
+        results=results
+    )
+
+    # 9. Return complete response
     return {
         "success": True,
         "message": "Query processed successfully.",
@@ -40,4 +51,5 @@ def process_user_request(question: str):
         "sql": clean_sql,
         "sql_explanation": sql_result.explanation,
         "results": results,
+        "analysis": analysis,
     }
